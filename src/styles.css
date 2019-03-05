@@ -1,0 +1,96 @@
+.container {
+  display: grid;
+  max-width: 80vw;
+  margin: auto;
+  grid-template-columns: repeat(6, 1fr);
+}
+
+header {
+  padding: 3rem;
+  grid-column: 1/7;
+}
+
+.cart-mini {
+  display: grid;
+  position: fixed;
+  top: 10px;
+  right: 20px;
+  float: right;
+  max-width: 20%;
+  border: solid thin;
+  background-color: #eee;
+  padding: 1em;
+  border-radius: 0.5em;
+}
+.cart-mini button {
+  justify-self: center;
+}
+
+.cart-item {
+  display: inline-block;
+  padding: 1rem;
+}
+
+.list-item-card {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 1rem;
+  margin-top: 0.5em;
+  justify-content: center;
+  border-radius: 0.5em;
+  background-color: #eaedff;
+}
+.list-item-card img {
+  border-radius: 0.5rem;
+}
+.list-item-card:hover {
+  border: solid thin;
+  box-shadow: 1px 1px 1px #1f1f1f90;
+}
+
+.description {
+  display: flex;
+  align-items: center;
+}
+
+.product-list ul {
+  display: grid;
+  list-style: none;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 1.5rem;
+}
+
+.content-wrapper {
+  grid-column: 2/7;
+}
+
+.line-through {
+  color: grey;
+  text-decoration: line-through;
+}
+
+.product-detail {
+  padding: 1em;
+}
+.product-detail img {
+  margin: 1em;
+}
+
+.btn {
+  border: solid thin;
+  border-radius: 0.5em;
+  border-style: outset;
+  color: #222;
+  border-color: #222;
+  padding: 0.5rem;
+  text-decoration: none;
+  min-width: 10px;
+  max-width: 80%;
+  text-align: center;
+  background-color: #eee !important;
+}
+.btn a:visited {
+  color: #222;
+}
+
+/*# sourceMappingURL=styles.css.map */
