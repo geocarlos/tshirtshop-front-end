@@ -8,7 +8,8 @@ const urls = {
     URL_CATEGORIES: '/api/categories',
     URL_CART: '/api/shopping-cart',
     URL_ADD_TO_CART: '/api/shopping-cart/add-to-cart',
-    URL_REMOVE_FROM_CART: '/api/shopping-cart/remove-from-cart'
+    URL_REMOVE_FROM_CART: '/api/shopping-cart/remove-from-cart',
+    URL_SIGNUP: '/auth/sign-up'
 }
 
 const itemsPerPage = 10;

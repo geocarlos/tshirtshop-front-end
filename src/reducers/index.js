@@ -1,4 +1,4 @@
-import { types } from '../actions';
+import types from '../actions/types';
 import { combineReducers } from 'redux';
 import { setPages } from '../helpers/helpers';
 import { itemsPerPage } from '../constants/constants';
@@ -130,6 +130,31 @@ const shoppingCart = (state = initialStateCart, action) => {
     }
 }
 
+const initialStateSignUp = {
+    isPending: false,
+    user: {},
+    error: ''
+}
+
+const signUp = (state = initialStateSignUp, action) => {
+    switch(action.type){
+        case types.SIGNUP:
+            return {
+                ...state, isPending: true
+            }
+        case types.SIGNUP_SUCCESS:
+            return {
+                ...state, user: action.payload, isPending: false
+            }
+        case types.SIGNUP_FAILED:
+            return {
+                ...state, error: action.error, isPending: false
+            }
+        default:
+            return state;
+    }
+}
+
 const currentPage = (state = {page: 0}, action) => {
     switch(action.type){
         case 'SET_CURRENT_PAGE':
@@ -139,4 +164,4 @@ const currentPage = (state = {page: 0}, action) => {
     }
 }
 
-export default combineReducers({ items, product, departments, categories, shoppingCart, currentPage });
+export default combineReducers({ items, product, departments, categories, shoppingCart, currentPage, signUp });

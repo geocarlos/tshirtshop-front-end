@@ -10,6 +10,7 @@ import ShoppingCart from './containers/ShoppingCart';
 import Header from './components/Header';
 import SideMenu from './containers/SideMenu';
 import Order from './containers/Order';
+import SignUp from './containers/SignUp';
 
 class App extends Component {
 
@@ -78,6 +79,10 @@ class App extends Component {
 
             <Route path='/items/shopping-cart/checkout' render={() => (
               <Order />
+            )}/>
+
+            <Route path='/auth/signup' render={() => (
+              <SignUp />
             )}/>
           </div>
         </AppContext.Provider>
