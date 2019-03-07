@@ -52,6 +52,9 @@ class ShoppingCart extends Component {
                 <p><Link className='btn' to='/'>
                     Home
                 </Link></p>
+                <p><Link className='btn' to='/items/shopping-cart/checkout'>
+                    Checkout
+                </Link></p>
             </div>
         )
     }

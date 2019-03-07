@@ -9,6 +9,7 @@ import ShoppingCartMini from './components/ShoppingCartMini';
 import ShoppingCart from './containers/ShoppingCart';
 import Header from './components/Header';
 import SideMenu from './containers/SideMenu';
+import Order from './containers/Order';
 
 class App extends Component {
 
@@ -50,7 +51,7 @@ class App extends Component {
               </div>
             )} />
 
-            <Route path='/products' render={({ match }) => (
+            <Route exact path='/products' render={({ match }) => (
               <div className='content-wrapper'>
                 <ShoppingCartMini />
                 <ProductList pageNumber={!match.query ? 0 : match.query.page} />
@@ -71,9 +72,13 @@ class App extends Component {
               </div>
             )}} />           
 
-            <Route path='/items/shopping-cart' render={() => (
+            <Route exact path='/items/shopping-cart' render={() => (
               <ShoppingCart />
             )} />
+
+            <Route path='/items/shopping-cart/checkout' render={() => (
+              <Order />
+            )}/>
           </div>
         </AppContext.Provider>
       </Router>
