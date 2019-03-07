@@ -56,7 +56,7 @@ header{
 }
 
 .product-list{
-    ul{
+    .item-list{
         display: grid;
         list-style: none;
         grid-template-columns: repeat(2, 1fr);
@@ -94,5 +94,15 @@ header{
     background-color: #eee !important;
     a:visited{
         color: $buttonTextColor;
+    }
+}
+
+.page-links {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    padding: 1rem;
+    li{
+        padding: .5rem;
     }
 }

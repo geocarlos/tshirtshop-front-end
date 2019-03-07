@@ -3,6 +3,9 @@ export const types = {
     GET_PRODUCTS: 'GET_PRODUCTS',
     GET_PRODUCTS_PENDING: 'GET_PRODUCTS_PENDING',
     GET_PRODUCTS_FAILED: 'GET_PRODUCTS_FAILED',
+    GET_PRODUCTS_CATEGORY: 'GET_PRODUCTS_CATEGORY',
+    GET_PRODUCTS_CATEGORY_PENDING: 'GET_PRODUCTS_CATEGORY_PENDING',
+    GET_PRODUCTS_CAREGORY_FAILED: 'GET_PRODUCTS_CATEGORY_FAILED',
     GET_DEPARTMENTS: 'GET_DEPARTMENTS',
     GET_DEPARTMENTS_PENDING: 'GET_DEPARTMENTS_PENDING',
     GET_DEPARTMENTS_FAILED: 'GET_DEPARTMENTS_FAILED',
@@ -12,7 +15,12 @@ export const types = {
     GET_SHOPPING_CART: 'GET_SHOPPING_CART',
     GET_SHOPPING_CART_PENDING: 'GET_SHOPPING_CART_PENDING',
     GET_SHOPPING_CART_FAILED: 'GET_SHOPPING_CART_FAILED',
+    SEARCH_PRODUCTS: 'SEARCH_PRODUCTS',
+    SEARCH_PRODUCTS_PENDING: 'SEARCH_PRODUCTS_PENDING',
+    SEARCH_PRODUCTS_FAILED: 'SEARCH_PRODUCTS_FAILED',
     GET_PRODUCT: 'GET_PRODUCT',
+    GET_PRODUCT_PENDING: 'GET_PRODUCT_PENDING',
+    GET_PRODUCT_FAILED: 'GET_PRODUCT_FAILED',
     GET_ORDERS: 'GET_ORDERS',
     ADD_TO_CART: 'ADD_TO_CART',
     ADD_TO_CART_SUCCESS: 'ADD_TO_CART_SUCCESS',
@@ -32,6 +40,33 @@ export const getProducts = (url) => (dispatch) => {
         types.GET_PRODUCTS_PENDING,
         types.GET_PRODUCTS,
         types.GET_PRODUCTS_FAILED,
+    );
+}
+
+export const getProductsByCategory = (url) => (dispatch) => {
+    asyncGetRequest(
+        url, dispatch,
+        types.GET_PRODUCTS_CATEGORY_PENDING,
+        types.GET_PRODUCTS_CATEGORY,
+        types.GET_PRODUCTS_CATEGORY_FAILED,
+    );
+}
+
+export const getProduct = (url) => (dispatch) => {
+    asyncGetRequest(
+        url, dispatch,
+        types.GET_PRODUCT_PENDING,
+        types.GET_PRODUCT,
+        types.GET_PRODUCT_FAILED,
+    );
+}
+
+export const searchProducts = (url) => (dispatch) => {
+    asyncGetRequest(
+        url, dispatch,
+        types.SEARCH_PRODUCTS_PENDING,
+        types.SEARCH_PRODUCTS,
+        types.SEARCH_PRODUCTS_FAILED,
     );
 }
 

@@ -7,36 +7,41 @@ import React, { Component } from 'react';
 import AppContext from '../contexts/contexts';
 import ListItemCard from '../components/ListItemCard';
 import { connect } from 'react-redux';
-import { getProducts, searchProducts } from '../actions';
+import { searchProducts, getProductsByCategory } from '../actions';
 import { urls } from '../constants/constants';
 import PageLinks from '../components/PageLinks';
 import SearchBox from '../components/SearchBox';
 import { getQueries } from '../helpers/helpers';
 
-class ProductList extends Component {
+class ProductCategory extends Component {
 
     constructor() {
         super();
         this.state = {
-            currentPage: 0,
             searchTerm: ''
         }
     }
 
     componentDidMount() {
 
-        this.props.dispatch(getProducts(urls.URL_PRODUCTS));
-        this.context.setPagingUrl('/products');
+        if (this.props.pageNumber) {
+            this.setCurrentPage(this.props.pageNumber - 1);
+        }
 
         /* Allow for bookmarking */
         const query = getQueries();
-        if (query.page) {
+        if(query.page){
             this.setCurrentPage(query.page - 1)
         }
+
+        this.props.dispatch(getProductsByCategory(urls.URL_PRODUCTS_CATEGORY + this.props.id));
+        const pathname = window.location.pathname;
+        this.context.setPagingUrl(pathname.substring(0, pathname.indexOf('page') - 1));
     }
 
     setCurrentPage = currentPage => {
-        this.setState({ currentPage })
+        /* Put in the global state in order to communicate with SideMenu */
+        this.props.dispatch({type: 'SET_CURRENT_PAGE', payload: currentPage});
     }
 
     handleSubmit = (event) => {
@@ -52,9 +57,7 @@ class ProductList extends Component {
     render() {
 
         const { products, isPending, error } = this.props;
-        const { currentPage } = this.state;
-
-        console.log(products[0]);
+        const { currentPage } = this.props;
 
         if (error) {
             return (
@@ -71,7 +74,7 @@ class ProductList extends Component {
                     <p>Loading items...</p>
                     :
                     <ul className='item-list'>
-                        {products.length > 0 && products[currentPage].map(product => (
+                        {products[currentPage] && products[currentPage].map(product => (
                             <li key={product.product_id}>
                                 <ListItemCard product={product} />
                             </li>
@@ -83,14 +86,15 @@ class ProductList extends Component {
     }
 }
 
-const mapStateTorProps = ({ items }) => {
+const mapStateTorProps = ({ items, currentPage }) => {
     return {
         products: items.products,
         isPending: items.isPending,
-        error: items.error
+        error: items.error,
+        currentPage: currentPage.page
     }
 }
 
-ProductList.contextType = AppContext;
+ProductCategory.contextType = AppContext;
 
-export default connect(mapStateTorProps)(ProductList);
+export default connect(mapStateTorProps)(ProductCategory);

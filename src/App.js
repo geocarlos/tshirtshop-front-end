@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import AppContext from './contexts/contexts';
 import ProductList from './containers/ProductList';
+import ProductCategory from './containers/ProductCategory';
 import Locale from './locales/Locale';
 import ProductDetail from './containers/ProductDetail';
 import ShoppingCartMini from './components/ShoppingCartMini';
@@ -15,14 +16,19 @@ class App extends Component {
     super();
     this.state = {
       lang: 'en',
-      cartItems: []
+      cartItems: [],
+      pagingUrl: '/products'
     }
   }
-  
+
   setLanguage = (lang) => {
     this.setState({ lang });
     Locale.loadLanguage(lang);
-  }  
+  }
+
+  setPagingUrl = (pagingUrl) => {
+    this.setState({ pagingUrl });
+  }
 
   render() {
     return (
@@ -30,7 +36,9 @@ class App extends Component {
         <AppContext.Provider
           value={{
             lang: this.state.lang,
-            translate: Locale.translate
+            translate: Locale.translate,
+            pagingUrl: this.state.pagingUrl,
+            setPagingUrl: this.setPagingUrl
           }}>
           <div className='container'>
             <Header />
@@ -42,16 +50,30 @@ class App extends Component {
               </div>
             )} />
 
-            <Route path='/department/category/:id/:product_name' render={({ match }) => (
+            <Route path='/products' render={({ match }) => (
+              <div className='content-wrapper'>
+                <ShoppingCartMini />
+                <ProductList pageNumber={!match.query ? 0 : match.query.page} />
+              </div>
+            )} />
+
+            <Route path='/products/details/:id/:product_name' render={({ match }) => (
               <div className='content-wrapper'>
                 <ShoppingCartMini />
                 <ProductDetail id={match.params.id} />
               </div>
             )} />
 
-          <Route path='/items/shopping-cart' render={() => (
-            <ShoppingCart />
-          )} />
+            <Route path='/department/:department/:id/:category' render={({ match }) => { console.log(match); return (
+              <div className='content-wrapper'>
+                <ShoppingCartMini />
+                <ProductCategory id={ match.params.id } />
+              </div>
+            )}} />           
+
+            <Route path='/items/shopping-cart' render={() => (
+              <ShoppingCart />
+            )} />
           </div>
         </AppContext.Provider>
       </Router>

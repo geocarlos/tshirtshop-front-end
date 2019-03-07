@@ -1,5 +1,7 @@
 import { types } from '../actions';
 import { combineReducers } from 'redux';
+import { setPages } from '../helpers/helpers';
+import { itemsPerPage } from '../constants/constants';
 
 const initialStateItems = {
     isPending: false,
@@ -12,13 +14,45 @@ const items = (state = initialStateItems, action) => {
         case types.GET_PRODUCTS_PENDING:
             return Object.assign({}, state, {isPeding: true});
         case types.GET_PRODUCTS:
-            return Object.assign({}, state, {products: action.payload, isPeding: false});
+            return Object.assign({}, state, {products: setPages(action.payload, itemsPerPage), isPeding: false});
         case types.GET_PRODUCTS_FAILED:
+            return Object.assign({}, state, {error: action.error, isPeding: true});
+        case types.GET_PRODUCTS_CATEGORY_PENDING:
+            return Object.assign({}, state, {isPeding: true});
+        case types.GET_PRODUCTS_CATEGORY:
+            return Object.assign({}, state, {products: setPages(action.payload, itemsPerPage), isPeding: false});
+        case types.GET_PRODUCTS_CATEGORY_FAILED:
+            return Object.assign({}, state, {error: action.error, isPeding: true}); 
+        case types.SEARCH_PRODUCTS_PENDING:
+            return Object.assign({}, state, {isPeding: true});
+        case types.SEARCH_PRODUCTS:
+            return Object.assign({}, state, {products: setPages(action.payload, itemsPerPage), isPeding: false});
+        case types.SEARCH_PRODUCTS_FAILED:
             return Object.assign({}, state, {error: action.error, isPeding: true});     
         default:
             return state;
     }
 }
+
+const initialStateItem = {
+    isPending: false,
+    item: {},
+    error: ''
+};
+
+const product = (state = initialStateItem, action) => {
+    switch(action.type){
+        case types.GET_PRODUCT_PENDING:
+            return Object.assign({}, state, {isPeding: true});
+        case types.GET_PRODUCT:
+            return Object.assign({}, state, {item: action.payload, isPeding: false});
+        case types.GET_PRODUCT_FAILED:
+            return Object.assign({}, state, {error: action.error, isPeding: true}); 
+        default:
+            return state;
+    }
+}
+
 
 const initialStateDepartments = {
     isPending: false,
@@ -96,4 +130,13 @@ const shoppingCart = (state = initialStateCart, action) => {
     }
 }
 
-export default combineReducers({ items, departments, categories, shoppingCart });
+const currentPage = (state = {page: 0}, action) => {
+    switch(action.type){
+        case 'SET_CURRENT_PAGE':
+            return Object.assign({}, state, {page: action.payload});
+        default:
+            return state;
+    }
+}
+
+export default combineReducers({ items, product, departments, categories, shoppingCart, currentPage });

@@ -53,7 +53,7 @@ header {
   align-items: center;
 }
 
-.product-list ul {
+.product-list .item-list {
   display: grid;
   list-style: none;
   grid-template-columns: repeat(2, 1fr);
@@ -91,6 +91,16 @@ header {
 }
 .btn a:visited {
   color: #222;
+}
+
+.page-links {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  padding: 1rem;
+}
+.page-links li {
+  padding: 0.5rem;
 }
 
 /*# sourceMappingURL=styles.css.map */

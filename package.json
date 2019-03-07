@@ -4,10 +4,12 @@
   "private": true,
   "dependencies": {
     "react": "^16.8.3",
+    "react-async-script-loader": "^0.3.0",
     "react-dom": "^16.8.3",
     "react-redux": "^6.0.1",
     "react-router-dom": "^4.3.1",
-    "react-scripts": "2.1.5",
+    "react-scripts": "^2.1.6",
+    "react-stripe-checkout": "^2.6.3",
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0"
   },
