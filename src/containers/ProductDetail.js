@@ -13,21 +13,40 @@ import AttributeValues from '../components/AttributeValues';
 
 class ProductDetail extends Component {
 
+    constructor() {
+        super();
+        this.state = {
+            color: 'White',
+            size: 'M'
+        }
+    }
+
     componentDidMount() {
         console.log(this.props.id)
-        this.props.dispatch(getProduct(urls.URL_PRODUCT+this.props.id))
+        this.props.dispatch(getProduct(urls.URL_PRODUCT + this.props.id))
     }
 
     addToCart = item => {
         const data = {
-          product_id: item.product_id,
-          _attributes: 'M, White',
-          quantity: 1,
-          buy_now: 1
+            product_id: item.product_id,
+            _attributes: `${this.state.color}, ${this.state.size}`,
+            quantity: 1,
+            buy_now: 1
         }
 
         this.props.dispatch(addItemToCart(urls.URL_ADD_TO_CART, data));
-      }
+    }
+
+    setColor = color => {
+        this.setState({ color });
+        console.log(this.state.color);
+    }
+
+    setSize = size => {
+        console.log(size)
+        this.setState({ size });
+        console.log(this.state.size);
+    }
 
     render() {
 
@@ -40,8 +59,6 @@ class ProductDetail extends Component {
         if (isPending) return (
             <div className='product-detail'>Loading...</div>
         )
-
-        console.log(product)
 
         return (
             <div className='product-detail'>
@@ -56,7 +73,8 @@ class ProductDetail extends Component {
                     Home
                 </Link>
                 <button className='btn' onClick={() => this.addToCart(product)}>Add to Cart</button>
-                {product.attribute_values && <AttributeValues attributes={product.attribute_values} />}
+                {product.attribute_values &&
+                    <AttributeValues attributes={product.attribute_values} setColor={this.setColor} setSize={this.setSize} />}
             </div>
         )
     }
