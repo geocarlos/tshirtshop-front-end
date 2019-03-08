@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from "react-router-dom";
+import { connect } from 'react-redux';
+import { isLoggedIn } from './actions';
+import { urls } from './constants/constants';
 import AppContext from './contexts/contexts';
 import ProductList from './containers/ProductList';
 import ProductCategory from './containers/ProductCategory';
@@ -11,6 +14,7 @@ import Header from './components/Header';
 import SideMenu from './containers/SideMenu';
 import Order from './containers/Order';
 import SignUp from './containers/SignUp';
+import SignIn from './containers/SignIn';
 
 class App extends Component {
 
@@ -21,6 +25,10 @@ class App extends Component {
       cartItems: [],
       pagingUrl: '/products'
     }
+  }
+
+  componentDidMount(){
+    this.props.dispatch(isLoggedIn(urls.URL_IS_LOGGED_IN));
   }
 
   setLanguage = (lang) => {
@@ -84,6 +92,10 @@ class App extends Component {
             <Route path='/auth/signup' render={() => (
               <SignUp />
             )}/>
+
+            <Route path='/auth/signin' render={() => (
+              <SignIn />
+            )}/>
           </div>
         </AppContext.Provider>
       </Router>
@@ -91,4 +103,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default connect()(App);

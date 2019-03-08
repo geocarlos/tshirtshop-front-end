@@ -4,11 +4,11 @@
  */
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import AppContext from '../contexts/contexts';
 import CartItem from '../components/CartItem';
 import { connect } from 'react-redux';
 import { getShoppingCart, removeItemFromCart } from '../actions';
 import { urls } from '../constants/constants';
+import { withRouter } from 'react-router-dom';
 
 class ShoppingCart extends Component {
 
@@ -60,16 +60,15 @@ class ShoppingCart extends Component {
     }
 }
 
-ShoppingCart.contextType = AppContext;
-
-const mapStateToProps = ({ shoppingCart }) => {
-    console.log(shoppingCart)
+const mapStateToProps = ({ shoppingCart, isUserLoggedIn }) => {
     return {
         cartItems: shoppingCart.cartItems,
         isPending: shoppingCart.isPending,
         error: shoppingCart.error,
-        result: shoppingCart.result
+        result: shoppingCart.result,
+        isUserLoggedIn: isUserLoggedIn.currentUser.isAuthenticated,
+        user: isUserLoggedIn.currentUser.user
     }
 }
 
-export default connect(mapStateToProps)(ShoppingCart);
+export default connect(mapStateToProps)(withRouter(ShoppingCart));

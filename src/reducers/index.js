@@ -155,6 +155,56 @@ const signUp = (state = initialStateSignUp, action) => {
     }
 }
 
+const initialStateSignIn = {
+    isPending: false,
+    result: {},
+    error: ''
+}
+
+const signIn = (state = initialStateSignIn, action) => {
+    switch(action.type){
+        case types.SIGNIN:
+            return {
+                ...state, isPending: true
+            }
+        case types.SIGNIN_SUCCESS:
+            return {
+                ...state, result: action.payload, isPending: false
+            }
+        case types.SIGNIN_FAILED:
+            return {
+                ...state, error: action.error, isPending: false
+            }
+        default:
+            return state;
+    }
+}
+
+const initialStateIsLoggedIn = {
+    isPending: false,
+    currentUser: {isAuthenticated: false, user: null},
+    error: ''
+}
+
+const isUserLoggedIn = (state = initialStateIsLoggedIn, action) => {
+    switch(action.type){
+        case types.IS_LOGGED_IN_PENDING:
+            return {
+                ...state, isPending: true
+            }
+        case types.IS_LOGGED_IN:
+            return {
+                ...state, currentUser: action.payload, isPending: false
+            }
+        case types.IS_LOGGED_IN_FAILED:
+            return {
+                ...state, error: action.error, isPending: false
+            }
+        default:
+            return state;
+    }
+}
+
 const currentPage = (state = {page: 0}, action) => {
     switch(action.type){
         case 'SET_CURRENT_PAGE':
@@ -164,4 +214,14 @@ const currentPage = (state = {page: 0}, action) => {
     }
 }
 
-export default combineReducers({ items, product, departments, categories, shoppingCart, currentPage, signUp });
+export default combineReducers({ 
+    items, 
+    product, 
+    departments, 
+    categories, 
+    shoppingCart, 
+    currentPage, 
+    signUp,
+    signIn,
+    isUserLoggedIn
+});

@@ -56,6 +56,7 @@ class SideMenu extends Component {
                         </li>
                     </ul>
                 ))}
+                
             </div>
         )
     }

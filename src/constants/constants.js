@@ -9,7 +9,9 @@ const urls = {
     URL_CART: '/api/shopping-cart',
     URL_ADD_TO_CART: '/api/shopping-cart/add-to-cart',
     URL_REMOVE_FROM_CART: '/api/shopping-cart/remove-from-cart',
-    URL_SIGNUP: '/auth/sign-up'
+    URL_SIGNUP: '/auth/sign-up',
+    URL_SIGNIN: '/auth/sign-in',
+    URL_IS_LOGGED_IN: '/api/user/is-logged-in'
 }
 
 const itemsPerPage = 10;

@@ -10,6 +10,24 @@ export const signUp = (url, data) => (dispatch) => {
     )
 }
 
+export const signIn = (url, data) => (dispatch) => {
+    asyncPostRequest(
+        url, data, dispatch,
+        types.SIGNIN,
+        types.SIGNIN_SUCCESS,
+        types.SIGNIN_FAILED
+    )
+}
+
+export const isLoggedIn = (url) => (dispatch) => {
+    asyncGetRequest(
+        url, dispatch,
+        types.IS_LOGGED_IN_PENDING,
+        types.IS_LOGGED_IN,
+        types.IS_LOGGED_IN_FAILED,
+    );
+}
+
 export const getProducts = (url) => (dispatch) => {
     asyncGetRequest(
         url, dispatch,

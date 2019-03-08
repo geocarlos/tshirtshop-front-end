@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import PaypalButton from './PayPalExpressCheckout';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
 /* Client and environment configuration */
 const ENV = process.env.NODE_ENV === 'production' ? 'production' : 'sandbox';
@@ -8,9 +10,14 @@ const CLIENT = {
     production: process.env.REACT_APP_PAYPAL_CLIENT_ID_PRODUCTION
 }
 
-console.log(ENV)
 class Order extends Component {
+
     render() {
+
+        if(!this.props.isUserLoggedIn){
+            this.props.history.push('/auth/signin')
+        }
+
         const onSuccess = (payment) => {
             console.log("Your payment was succeeded!", payment);
         }
@@ -40,4 +47,9 @@ class Order extends Component {
     }
 }
 
-export default Order;
+const mapStateToProps = ({ isUserLoggedIn }) => ({
+    isUserLoggedIn: isUserLoggedIn.currentUser.isAuthenticated,
+    user: isUserLoggedIn.currentUser.user
+});
+
+export default connect(mapStateToProps)(withRouter(Order));
