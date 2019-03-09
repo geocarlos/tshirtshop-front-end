@@ -9,26 +9,26 @@ const initialStateItems = {
     error: ''
 };
 
-const items = (state = initialStateItems, action) => {
+export const items = (state = initialStateItems, action) => {
     switch(action.type){
         case types.GET_PRODUCTS_PENDING:
-            return Object.assign({}, state, {isPeding: true});
+            return Object.assign({}, state, {isPending: true});
         case types.GET_PRODUCTS:
-            return Object.assign({}, state, {products: setPages(action.payload, itemsPerPage), isPeding: false});
+            return Object.assign({}, state, {products: setPages(action.payload, itemsPerPage), isPending: false});
         case types.GET_PRODUCTS_FAILED:
-            return Object.assign({}, state, {error: action.error, isPeding: true});
+            return Object.assign({}, state, {error: action.error, isPending: true});
         case types.GET_PRODUCTS_CATEGORY_PENDING:
-            return Object.assign({}, state, {isPeding: true});
+            return Object.assign({}, state, {isPending: true});
         case types.GET_PRODUCTS_CATEGORY:
-            return Object.assign({}, state, {products: setPages(action.payload, itemsPerPage), isPeding: false});
+            return Object.assign({}, state, {products: setPages(action.payload, itemsPerPage), isPending: false});
         case types.GET_PRODUCTS_CATEGORY_FAILED:
-            return Object.assign({}, state, {error: action.error, isPeding: true}); 
+            return Object.assign({}, state, {error: action.error, isPending: true}); 
         case types.SEARCH_PRODUCTS_PENDING:
-            return Object.assign({}, state, {isPeding: true});
+            return Object.assign({}, state, {isPending: true});
         case types.SEARCH_PRODUCTS:
-            return Object.assign({}, state, {products: setPages(action.payload, itemsPerPage), isPeding: false});
+            return Object.assign({}, state, {products: setPages(action.payload, itemsPerPage), isPending: false});
         case types.SEARCH_PRODUCTS_FAILED:
-            return Object.assign({}, state, {error: action.error, isPeding: true});     
+            return Object.assign({}, state, {error: action.error, isPending: true});     
         default:
             return state;
     }
@@ -40,14 +40,14 @@ const initialStateItem = {
     error: ''
 };
 
-const product = (state = initialStateItem, action) => {
+export const product = (state = initialStateItem, action) => {
     switch(action.type){
         case types.GET_PRODUCT_PENDING:
-            return Object.assign({}, state, {isPeding: true});
+            return Object.assign({}, state, {isPending: true});
         case types.GET_PRODUCT:
-            return Object.assign({}, state, {item: action.payload, isPeding: false});
+            return Object.assign({}, state, {item: action.payload, isPending: false});
         case types.GET_PRODUCT_FAILED:
-            return Object.assign({}, state, {error: action.error, isPeding: true}); 
+            return Object.assign({}, state, {error: action.error, isPending: true}); 
         default:
             return state;
     }
@@ -63,11 +63,11 @@ const initialStateDepartments = {
 const departments = (state = initialStateDepartments, action) => {
     switch(action.type){
         case types.GET_DEPARTMENTS_PENDING:
-            return Object.assign({}, state, {isPeding: true});
+            return Object.assign({}, state, {isPending: true});
         case types.GET_DEPARTMENTS:
-            return Object.assign({}, state, {items: action.payload, isPeding: false});
+            return Object.assign({}, state, {items: action.payload, isPending: false});
         case types.GET_DEPARTMENTS_FAILED:
-            return Object.assign({}, state, {error: action.error, isPeding: true});     
+            return Object.assign({}, state, {error: action.error, isPending: true});     
         default:
             return state;
     }
@@ -82,11 +82,11 @@ const initialStateCategories = {
 const categories = (state = initialStateCategories, action) => {
     switch(action.type){
         case types.GET_CATEGORIES_PENDING:
-            return Object.assign({}, state, {isPeding: true});
+            return Object.assign({}, state, {isPending: true});
         case types.GET_CATEGORIES:
-            return Object.assign({}, state, {items: action.payload, isPeding: false});
+            return Object.assign({}, state, {items: action.payload, isPending: false});
         case types.GET_CATEGORIES_FAILED:
-            return Object.assign({}, state, {error: action.error, isPeding: true});     
+            return Object.assign({}, state, {error: action.error, isPending: true});     
         default:
             return state;
     }
@@ -102,11 +102,11 @@ const initialStateCart = {
 const shoppingCart = (state = initialStateCart, action) => {
     switch(action.type){
         case types.GET_SHOPPING_CART_PENDING:
-            return Object.assign({}, state, {isPeding: true});
+            return Object.assign({}, state, {isPending: true});
         case types.GET_SHOPPING_CART:
-            return Object.assign({}, state, {cartItems: action.payload, isPeding: false});
+            return Object.assign({}, state, {cartItems: action.payload, isPending: false});
         case types.GET_SHOPPING_CART_FAILED:
-            return Object.assign({}, state, {error: action.error, isPeding: true});   
+            return Object.assign({}, state, {error: action.error, isPending: true});   
         case types.ADD_TO_CART:
             return {
                 ...state, isPending: true
